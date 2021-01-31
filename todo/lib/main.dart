@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/api/api.dart';
+import './screens/addTodo.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,8 +35,36 @@ class HomePage extends StatelessWidget {
         itemCount: todoP.todos.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            title: Text(todoP.todos[index].title),
-            subtitle: Text(todoP.todos[index].description),
+            trailing: IconButton(
+              icon: Icon(Icons.delete, color: Colors.red),
+              onPressed: () {
+                todoP.deleteTodo(todoP.todos[index]);
+                }
+            ),
+            title: Text(
+              todoP.todos[index].title, 
+              style: TextStyle(
+                fontSize: 20, 
+                fontWeight: FontWeight.bold
+              ),
+            ),
+            subtitle: Text(
+              todoP.todos[index].description, 
+              style: TextStyle(
+                fontSize: 15, 
+                color: Colors.grey
+              ),
+            ),
+          );
+        }
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add, size:30),
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => AddTodoScreen()
+            )
           );
         }
       ),

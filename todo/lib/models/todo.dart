@@ -1,5 +1,5 @@
 class Todo {
-  final int id;
+  int id;
   final String title;
   final String description;
 
@@ -12,4 +12,10 @@ class Todo {
       description: json['description']
     );
   }
+
+  dynamic toJson() => {
+    'id': id,
+    'title': title,
+    'description': description
+  };
 }
